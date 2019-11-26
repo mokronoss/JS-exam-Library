@@ -1,0 +1,66 @@
+//   ****************   GLOBAL   ************************
+.container{
+    width: 1000px;
+    margin: 0 auto;
+    padding: 0 auto;
+    // display: flex;
+}
+
+h1{
+	padding-left: 3rem;
+}
+img{
+	height: 12vh;
+	width: 5vw;
+	}			
+
+
+//   ****************   HEADER   ************************
+
+header{
+	padding-left: 3rem;
+}
+
+
+//   *************    SECTION LIST   ********************
+#divSection{
+    // display: flex;
+    // justify-content: space-between;
+
+    #divSectionL{
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+
+
+        .divBook{
+            margin-bottom: 1rem;
+            display: flex;
+
+
+            figure{
+                display: flex;
+                flex-wrap: wrap;
+                .img{
+                    margin-bottom: 1rem;;
+                }
+            }
+            .divText{
+                min-width: 30%;
+                padding: 1rem;
+            }
+        }
+
+    }
+    #divSectionR{
+        width: 30%;
+    }
+}
+//   ****************   FOOTER   ************************
+footer{
+    border: 1px solid black;
+    margin-top: 10rem;
+		min-height: 10rem;
+		padding-left: 3rem;
+}
+
