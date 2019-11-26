@@ -30,7 +30,7 @@ header{
     #divSectionL{
         width: 70%;
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
 
 
         .divBook{
@@ -38,12 +38,10 @@ header{
             display: flex;
 
 
-            figure{
+            figure, img{
                 display: flex;
-                flex-wrap: wrap;
-                .img{
-                    margin-bottom: 1rem;;
-                }
+                align-items: center;
+
             }
             .divText{
                 min-width: 30%;
