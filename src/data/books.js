@@ -24,7 +24,7 @@ export const books = [
     resume: "Le Tractatus Logico-philosophicus est un ouvrage sur le sens. Il s'agit de tracer les limites du sens, de séparer ce qui peut être dit et ce qui ne peut pas l'être. Tout ne peut en effet être dit de façon sensée, il y a pour Wittgenstein une limite à l'expression des pensées. L'auteur ne soutient pas qu'il y a des pensées en elles-mêmes dépourvues de sens, mais plutôt que toutes les pensées ne sont pas exprimables.",
     auteur: 'L. Wittgenstein',
     categorie: 'essai',
-    image: '',
+    image: '/assets/images/book-default.png',
   },
   {
     id: 3,

@@ -18,7 +18,8 @@ img{
 //   ****************   HEADER   ************************
 
 header{
-	padding-left: 3rem;
+    padding-left: 3rem;
+    text-align: center;
 }
 
 
@@ -36,16 +37,13 @@ header{
         .divBook{
             margin-bottom: 1rem;
             display: flex;
+            align-items: center;
 
 
-            figure, img{
-                display: flex;
-                align-items: center;
-
-            }
             .divText{
                 min-width: 30%;
                 padding: 1rem;
+                min-width: 100%;
             }
         }
 
@@ -59,6 +57,14 @@ footer{
     border: 1px solid black;
     margin-top: 10rem;
 		min-height: 10rem;
-		padding-left: 3rem;
+        padding-left: 3rem;
+        
+        #btnSupprimer{
+            display: none;
+            margin: 1rem;
+        }
+        
+        
 }
+
 

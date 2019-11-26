@@ -2,7 +2,7 @@
 //   ****************   IMPORT   ************************
 import $ from 'jquery';
 import { books } from './data/books';
-import random from './data/functionsG';
+import {random} from './data/functionsG';
 
 
 //   ****************   GENERAL   ***********************
@@ -13,21 +13,22 @@ divG.addClass('container');
 
 //   ****************   HEADER   ************************
 const header = $('<header></header>');
-const h2 = $('<h2>Ma Bibliteque du Quartier</h2>');
-header.append(h2);
 divG.append(header);
-header.css({ 'background-color': 'grey' });
+header.css({ 'background-color': '#e6e6e6' });
 
 // //TODO
-// const randomBook = books[random(books.length)];
-// header.add( `
-//     <h2>le bestseller recommondé </h2>
-//     <figure>
-//         <img src="${randomBook.image}" />
-//     </figure>
-//     <h3>${randomBook.description}</h3>
-
-// `);
+const randomBook = books[random(books.length)];
+header.html(`
+    <h1>Ma Bibliteque du Quartier</h1>
+    <h2>le bestseller recommondé </h2>
+    <figure>
+        <img src="${randomBook.image}" />
+    </figure>
+    <h3 id="titre">Titre : ${randomBook.titre}</h3>
+    <h3 id="auteur"> Auteur : ${randomBook.auteur}</h3>
+    <p id="resume"> Description : ${randomBook.resume}</p>
+    <h3 id="categorie"> Categorie : ${randomBook.categorie}</h3>
+`);
 
 //   ****************   SECTION   ***********************
 
@@ -41,6 +42,9 @@ const divSectionL = $('<div></div>');
 divSection.append(divSectionL);
 divSectionL.attr('id', 'divSectionL');
 
+
+
+let count = 0;
     for (const book of books) {
         //div for 1 book
         const divBook = $('<div></div>');
@@ -77,24 +81,53 @@ divSectionL.attr('id', 'divSectionL');
         //add btn in  bottom of div text
         const btnEmprunter =$('<button></button>');  
         btnEmprunter.attr('id','btnEmprunter');
-        btnEmprunter.html('Emprunter');
+        btnEmprunter.html('Reserver');
         divT.append(btnEmprunter);
 
-        // -------------- ADD EVENT BUTTON EMPRUNTER ---------------------
+                	//   -------------- BONUS  COULEUR BACGROUND CATEGORIE ---------------------
+	    if (book.categorie === 'essai') {
+           divT.css({ 'background-color': '#ffffbe' })
+        }
+        if(book.categorie === 'roman') {
+            divT.css({ 'background-color': '#e5ffbe' })
+         }
+         if(book.categorie === 'bd') {
+            divT.css({ 'background-color': '#b3c6c6' })
+        }
+
+        // -------------- ADD EVENT BUTTON RESERVER ---------------------
         // list before to not recreate and add elements
 
 
         btnEmprunter.on('click', function() {
-            console.log('testB');
-            const list = $('<ul></ul>');
-            list.attr('id', 'liste');
-        const listItem = $('<li></li>');
-        listItem.attr=('id', 'listItem');
-        const contenu = $('#divText').clone();
-        listItem.append(contenu);
-        console.log(list);
-        console.log(listItem);
+
+            const list = $('#liste');
+            
+
+            const newItem = $(`<li>
+            <h1>Ma Bibliteque du Quartier</h1>
+            <h2>le bestseller recommondé </h2>
+            <figure>
+                <img src="${book.image}" />
+            </figure>
+            <h3 id="titre">Titre : ${book.titre}</h3>
+            <h3 id="auteur"> Auteur : ${book.auteur}</h3>
+            <p id="resume"> Description : ${book.resume}</p>
+            <h3 id="categorie"> Categorie : ${book.categorie}</h3></li>
+            `);
+
+            list.prepend(newItem);
+            $(this).prop("disabled",true);
+
+            count +=$(newItem).length;
+            console.log(count);
+            $('#btnSupprimer').css('display', 'block');
+
+
         });
+
+
+
     }
 
 const divSectionR = $('<div></div>');
@@ -105,9 +138,45 @@ divSectionR.attr('id', 'divSection');
 //   ****************   FOOTER   ************************
 
 const footer = $('<footer></footer>');
-// const footerTitre = $('<h2>Vos Livres</h2>');
+const footerTitre = $('<h2>Vos Livres</h2>');
 
-// footer.append(list);
-// const list = $('#liste').get();
-// footer.append(list);
+
+const list = $('<ul></ul>');
+list.attr('id', 'liste');
+
+footer.append(list);
+
+    // -------------- ADD  BUTTON  + EVENT Supprimer  ---------------------
+    const btnSupprimer = $('<button>Annuler </button>');
+    btnSupprimer.attr('id', 'btnSupprimer');
+    footer.append(btnSupprimer);
+
+        // -------------- ON CLICK COMMANDER HIDE WEBSITE by variable  ---------------------
+        btnSupprimer.on('click', function (e) {
+            e.preventDefault();
+        location.reload();
+        });
+    // -------------- ADD  BUTTON  + EVENT Commander  ---------------------
+    const btnCommander  = $('<button>Emprunter</button>');
+    btnCommander.attr('id', 'btnCommander');
+    footer.append(btnCommander );
+
+        // -------------- ON CLICK COMMANDER HIDE WEBSITE by variable  ---------------------
+        btnCommander.on('click', function (e) {
+        e.preventDefault();
+
+        if(list.val() < 0 ){
+            alert ("ce n'est pas possible emprunter 0 livre")
+        }
+        else{
+        divG.hide();
+        //TODO count of listItem 
+        const nrlivre = count;
+        var date = new Date();
+        const time = date.getHours() +2;
+        $('body').text(`Vos ${nrlivre} livres sont empruntés. Vous pouvez passer les chercher aujourd'hui, avant ${time}heures`).css({ 'font-size' : '2rem' });
+        }
+    });
+
+
 divG.append(footer);
